@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="styles_login.css">
 </head>
-<body align="center">
+<body>
     <h1>MakeMyLeague</h1>
     <form>
-        <input type="text" placeholder="Username"><br><br>
-        <input type="password" placeholder="Password"><br><br>
-        
+        <input type="text" placeholder="Username" class="input-field"><br><br>
+        <input type="password" placeholder="Password" class="input-field"><br><br>
+        <button onclick="window.location.href='home.html'">Login</button>
     </form>
-    <button onclick="window.location.href='home.html'">Login</button><br><br>
-        <p>Don't have an account? <a href="register.html" style="color: blue;">
-            <u>Sign up</u></a></p>
+    <p>Don't have an account? <a href="register.html" class="link">Sign up</a></p>
 </body>
 </html>
