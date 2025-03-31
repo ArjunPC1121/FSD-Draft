@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Oxanium:wght@400;700&family=Rajdhani:wght@400;700&family=Exo+2:wght@400;700&display=swap');
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #00246B, #CADCFC);
+    text-align: center;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding-top: 30px;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.2);
+    margin-top: -130px;
+    font-family: Oxanium;
+}
+h2 {
+    font-family: Rajdhani;
+}
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+div {
+    margin: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+button {
+    background: transparent;
+    color: white;
+    font-size: 1.5rem;
+    padding: 15px;
+    border: 2px solid white;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    font-family: Oxanium;
+}
+
+button img {
+    width: 65px;
+    height: 65px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background: white;
+    color: #243B55;
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
