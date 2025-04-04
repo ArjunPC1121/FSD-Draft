@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Oxanium:wght@400;700&family=Rajdhani:wght@400;700&family=Exo+2:wght@400;700&display=swap');
+#teamInputs {
+    background-color: transparent; /* Make background transparent */
+    padding: 0; /* Remove padding for seamless look */
+    margin-top: 1rem; /* Space between team inputs and the confirm button */
+}
+
+/* Style the input fields */
+#teamInputs input {
+    width: 100%;
+    padding: 0.5rem; /* Padding for the input fields */
+    margin-bottom: 1rem; /* Space below each input */
+    border: 1px solid #ddd; /* Keep border for input fields */
+    border-radius: 4px; /* Rounded corners for input fields */
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    /* background: linear-gradient(to right, #00246B, #CADCFC); */
+    background-image: url("../images/bg.png");
+    background-size: contain;
+    text-align: center;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+p {
+    color: #00246B;
+    font-family: Oxanium;
+    font-weight: bold;
+}
+h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.2);
+    font-family: Oxanium;
+}
+
+h2 {
+    font-family: Rajdhani;
+    margin-bottom: 20px;
+}
+
+/* Form Box */
+.form-box {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 650px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Sports Buttons */
+/* Sports Buttons - Align Side by Side */
+.sports-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Allows responsiveness */
+    justify-content: center; /* Center aligns the buttons */
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+
+.sports-buttons button {
+    background: transparent;
+    color: #00246B;
+    font-size: 1.5rem;
+    padding: 15px;
+    border: 2px solid #00246B;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    letter-spacing: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 150px;
+    font-family: Oxanium;
+}
+.sports-buttons button.selected {
+    box-shadow: 0 0 10px #CADCFC;
+    background: #CADCFC; /* Change background color when selected */
+    color: #00246B; /* Adjust text color for contrast */
+    transform: scale(1.1); /* Slight zoom effect */
+    transition: all 0.2s ease-in-out;
+}
+
+.sports-buttons button img {
+    width: 65px;
+    height: 65px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+
+.sports-buttons button:hover {
+    background: #CADCFC;
+    color: #00246B;
+    transform: scale(1.05);
+}
+
+/* Select Format */
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid #00246B;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #00246B;
+    font-weight: bold;
+}
+
+/* Next Button */
+#nextBtn {
+    background: #00246B;
+    color: #CADCFC;
+    font-size: 1rem;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.3s ease-in-out;
+}
+
+#nextBtn:hover {
+    background: #CADCFC;
+    color: #00246B;
+}

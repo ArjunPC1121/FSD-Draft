@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create</title>
+    <link rel="stylesheet" href="../css/styles_create_load.css">
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let selectedSport = null; // Track selected sport
+
+        // Get all sport buttons
+        const sportButtons = document.querySelectorAll(".sports-buttons button");
+        sportButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                // Remove selection from all buttons
+                sportButtons.forEach(btn => btn.classList.remove("selected"));
+                
+                // Mark the clicked button as selected
+                this.classList.add("selected");
+                selectedSport = this.textContent.trim(); // Store selected sport
+            });
+        });
+
+        // Handle Next button click
+        document.getElementById("nextBtn").addEventListener("click", function () {
+            const format = document.getElementById("format").value;
+
+            if (!selectedSport) {
+                alert("Please select a sport before proceeding!");
+                return;
+            }
+
+            if (!format) {
+                alert("Please select a format before proceeding!");
+                return;
+            }
+
+            // alert(`Proceeding with ${selectedSport} in ${format} format!`);
+            window.location.href = "add-teams.html"; // Uncomment to redirect
+        });
+    });
+</script>
+
+<body>
+    
+    <h2>Welcome to Make My League</h2>
+
+    <div class="form-box">
+        <p>Create your League!</p>
+        <div class="sports-buttons">
+            
+            <button><img src="../images/cricket.png" alt="Cricket">Cricket</button>
+            <button><img src="../images/football.png" alt="Football">Football</button>
+            <button><img src="../images/badminton.png" alt="Badminton">Badminton</button>
+        </div>
+
+        <select id="format" >
+            <option value="">Select Format</option>
+            <option value="Round Robin">Normal Round Robin (Every team plays every other team once)</option>
+            <option value="Knockout">IPL Format (Double round-robin followed by knockout stages)</option>
+            <option value="Mixed">Football League Format (Double round-robin)</option>
+        </select>
+
+        <button id="nextBtn">Next</button>
+    </div>
+
+</body>
+</html>

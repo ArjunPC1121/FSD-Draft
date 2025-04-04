@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../css/styles_create_load.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Teams</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Teams</h1>
+
+        <div class="form-box">
+            <p>Enter the number of teams and add their names</p>
+            <input type="number" id="numTeams" placeholder="Enter number of teams" min="1">
+            <button id="confirm" class="sports-buttons">Confirm</button>
+            
+            <div id="teamInputs" class="form-box"></div> <!-- Moved inside the form box -->
+
+            <button id="finishBtn" style="display: none;">Create League</button>
+        </div>
+    </div>
+
+    <script>
+        let teams = [];
+        const leagueId = new URLSearchParams(window.location.search).get("leagueId");
+
+        document.getElementById("confirm").addEventListener("click", () => {
+            const numTeams = parseInt(document.getElementById("numTeams").value);
+            const teamInputsDiv = document.getElementById("teamInputs");
+            teamInputsDiv.innerHTML = "";
+
+            if (numTeams > 0) {
+                for (let i = 1; i <= numTeams; i++) {
+                    teamInputsDiv.innerHTML += `<input type="text" id="team${i}" placeholder="Team ${i} Name">`;
+                }
+                document.getElementById("finishBtn").style.display = "block";
+            } else {
+                alert("Please enter a valid number of teams.");
+            }
+        });
+
+        document.getElementById("finishBtn").addEventListener("click", async () => {
+            const numTeams = parseInt(document.getElementById("numTeams").value);
+            teams = [];
+
+            for (let i = 1; i <= numTeams; i++) {
+                const teamName = document.getElementById(`team${i}`).value;
+                if (!teamName) {
+                    alert("Please fill all team names.");
+                    return;
+                }
+                teams.push(teamName);
+            }
+
+            const response = await fetch("http://127.0.0.1:5000/api/teams", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ leagueId, teams })
+            });
+
+            if (response.ok) {
+                alert("Teams added successfully!");
+                window.location.href = "add-players.html"; 
+            } else {
+                alert("Error adding teams.");
+            }
+        });
+    </script>
+</body>
+</html>
