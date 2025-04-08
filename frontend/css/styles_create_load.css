@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Oxanium:wght@400;700&family=Rajdhani:wght@400;700&family=Exo+2:wght@400;700&display=swap');
-#teamInputs {
+button {
     background-color: transparent; /* Make background transparent */
     padding: 0; /* Remove padding for seamless look */
     margin-top: 1rem; /* Space between team inputs and the confirm button */
 }
 
 /* Style the input fields */
-#teamInputs input {
+input {
     width: 100%;
     padding: 0.5rem; /* Padding for the input fields */
     margin-bottom: 1rem; /* Space below each input */
@@ -17,7 +17,7 @@ body {
     font-family: 'Poppins', sans-serif;
     /* background: linear-gradient(to right, #00246B, #CADCFC); */
     background-image: url("../images/bg.png");
-    background-size: contain;
+    /* background-size: contain; */
     text-align: center;
     color: white;
     height: 100vh;
@@ -125,7 +125,7 @@ select {
 }
 
 /* Next Button */
-#nextBtn {
+button {
     background: #00246B;
     color: #CADCFC;
     font-size: 1rem;
@@ -137,7 +137,7 @@ select {
     transition: background 0.3s ease-in-out;
 }
 
-#nextBtn:hover {
+button:hover {
     background: #CADCFC;
     color: #00246B;
 }
