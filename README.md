@@ -1,3 +1,6 @@
+To Run
+npm install
+npm run dev
 # FSD-Draft
 First draft of FSD project
 
