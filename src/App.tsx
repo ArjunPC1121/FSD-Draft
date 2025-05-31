@@ -11,22 +11,24 @@ import RegisterPage from './pages/auth/RegisterPage';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import CreateLeaguePage from './pages/leagues/CreateLeaguePage';
 import ViewLeaguePage from './pages/leagues/ViewLeaguePage';
+import PublicLeagueViewPage from './pages/leagues/PublicLeagueViewPage'; // <-- ADD THIS LINE
+
+// League management (details) page
+import LeagueDetailsPage from './components/leagues/LeagueDetailsPage';
 
 // Protected route wrapper
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuthStore();
-  
   if (!user) {
     return <Navigate to="/auth/login" replace />;
   }
-  
   return <>{children}</>;
 };
 
 export default function App() {
   const { setUser } = useAuthStore();
   const { theme } = useThemeStore();
-  
+
   // Set theme on body
   useEffect(() => {
     if (theme === 'dark') {
@@ -35,7 +37,7 @@ export default function App() {
       document.documentElement.classList.remove('dark');
     }
   }, [theme]);
-  
+
   // Check for existing session
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -43,12 +45,11 @@ export default function App() {
         setUser(session?.user || null);
       }
     );
-    
     return () => {
       subscription.unsubscribe();
     };
   }, [setUser]);
-  
+
   return (
     <Routes>
       {/* Public routes */}
@@ -56,8 +57,9 @@ export default function App() {
       <Route path="/auth/login" element={<LoginPage />} />
       <Route path="/auth/register" element={<RegisterPage />} />
       <Route path="/view-league" element={<ViewLeaguePage />} />
-      <Route path="/view-league/:leagueCode" element={<ViewLeaguePage />} />
-      
+      {/* Use the correct component for league details by code */}
+      <Route path="/view-league/:leagueCode" element={<PublicLeagueViewPage />} />
+
       {/* Protected routes */}
       <Route
         path="/dashboard"
@@ -75,7 +77,15 @@ export default function App() {
           </ProtectedRoute>
         }
       />
-      
+      <Route
+        path="/leagues/:leagueId"
+        element={
+          <ProtectedRoute>
+            <LeagueDetailsPage />
+          </ProtectedRoute>
+        }
+      />
+
       {/* Catch-all redirect */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
