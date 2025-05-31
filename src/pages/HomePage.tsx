@@ -1,12 +1,31 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Trophy, Users, Calendar, Shield } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Session } from '@supabase/supabase-js'; // ✅ Added for type safety
 import Layout from '../components/layout/Layout';
 import Button from '../components/ui/Button';
 import { Card, CardContent } from '../components/ui/Card';
 import { sportIcons } from '../lib/utils';
+import { supabase } from '../lib/supabase';
 
 export default function HomePage() {
+  const [session, setSession] = useState<Session | null>(null); // ✅ Typed state
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session: currentSession } }) => {
+      setSession(currentSession);
+    });
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((_event, newSession) => {
+      setSession(newSession);
+    });
+
+    return () => {
+      authListener.subscription.unsubscribe();
+    };
+  }, []);
+
   return (
     <Layout>
       <section className="relative overflow-hidden bg-gradient-to-b from-background to-background/70 py-20">
@@ -18,7 +37,9 @@ export default function HomePage() {
           >
             <h1 className="mb-6 text-4xl font-bold leading-tight sm:text-5xl md:text-6xl">
               Create & Manage<br />
-              <span className="bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">Sports Leagues</span>
+              <span className="bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
+                Sports Leagues
+              </span>
             </h1>
             <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground">
               MakeMyLeague helps you organize Cricket, Football, and Badminton leagues with teams, matches, and standings. Share your league with a simple code.
@@ -37,7 +58,7 @@ export default function HomePage() {
             </div>
           </motion.div>
         </div>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -62,7 +83,7 @@ export default function HomePage() {
           </div>
         </motion.div>
       </section>
-      
+
       <section className="py-20">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
@@ -71,7 +92,7 @@ export default function HomePage() {
               MakeMyLeague simplifies sports league management with powerful features that help you organize games and keep track of your league.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -88,7 +109,7 @@ export default function HomePage() {
                 Set up your custom league for Cricket, Football, or Badminton in seconds.
               </p>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -104,7 +125,7 @@ export default function HomePage() {
                 Add team details, player information, and customize your roster.
               </p>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -120,7 +141,7 @@ export default function HomePage() {
                 Create fixtures, update scores, and track match results easily.
               </p>
             </motion.div>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -139,25 +160,27 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      
-      <section className="bg-muted py-20">
-        <div className="container mx-auto px-4">
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold">Ready to Get Started?</h2>
-            <p className="mx-auto max-w-2xl text-muted-foreground">
-              Create your league today and experience the easiest way to manage sports competitions.
-            </p>
+
+      {!session && (
+        <section className="bg-muted py-20">
+          <div className="container mx-auto px-4">
+            <div className="mb-12 text-center">
+              <h2 className="mb-4 text-3xl font-bold">Ready to Get Started?</h2>
+              <p className="mx-auto max-w-2xl text-muted-foreground">
+                Create your league today and experience the easiest way to manage sports competitions.
+              </p>
+            </div>
+
+            <div className="flex justify-center">
+              <Link to="/auth/register">
+                <Button size="lg">
+                  Create Account
+                </Button>
+              </Link>
+            </div>
           </div>
-          
-          <div className="flex justify-center">
-            <Link to="/auth/register">
-              <Button size="lg">
-                Create Account
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
     </Layout>
   );
 }
